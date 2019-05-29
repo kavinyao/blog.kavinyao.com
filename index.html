@@ -9,9 +9,37 @@ body {
   max-width: 1000px;
   margin: 0 auto;
 }
-.row {
-  border: 1px #000;
-  border-style: solid;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+header {
+  margin-top: 1em;
+}
+header h1 {
+  font-size: 2em;
+}
+.self-intro {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  font-size: 1.1em;
+}
+.article-list {
+  font-size: 1.8em;
+}
+.article-list li {
+  margin-bottom: 1em;
+}
+.sidebar {
+  font-size: 1.5em;
+}
+.sidebar ul {
+  border: 1px #333;
+  border-left-style: solid;
+  padding-left: 1em;
+}
+.sidebar li {
+  margin-bottom: .5em;
 }
     </style>
   </head>
@@ -19,7 +47,9 @@ body {
     <header>
       <div class="row">
         <div class="col-xs-12">
-          <a href="/">Kavin Yao</a>
+          <h1>
+            <a href="/">Kavin Yao</a>
+          </h1>
         </div>
       </div>
     </header>
@@ -32,29 +62,27 @@ body {
           </div>
         </div>
       </div>
-      <div class="artile-list">
-        <div class="row">
-          <div class="col-xs-12 col-md-8">
-            <h1>Artilist List</h1>
-            <ul>
-              <li><a href="#">Set Up Ethernet at Home with Patch Box</a></li>
-              <li><a href="#">The Fun and Pain of SFF Builds</a></li>
-              <li><a href="#">How to Overclock I7-7700K to 5Ghz</a></li>
-              <li><a href="#">Why I Switched From CS:GO to Apex Legends</a></li>
-              <li><a href="#">I Won't Buy a New iPhone Until It's Notchless</a></li>
-              <li><a href="#">Bring Back Rationality</a></li>
-              <li><a href="#">The Meaningless War of modern CPU</a></li>
-              <li><a href="#">Smart Phones are the new PCs</a></li>
-            </ul>
-          </div>
+      <div class="row">
+        <div class="article-list col-xs-12 col-md-8">
+          <!-- <h1>Article List</h1> -->
+          <ul>
+            <li><a href="#">Set Up Ethernet at Home with Patch Box</a></li>
+            <li><a href="#">The Fun and Pain of SFF Builds</a></li>
+            <li><a href="#">How to Overclock I7-7700K to 5Ghz</a></li>
+            <li><a href="#">Why I Switched From CS:GO to Apex Legends</a></li>
+            <li><a href="#">I Won't Buy a New iPhone Until It's Notchless</a></li>
+            <li><a href="#">Bring Back Rationality</a></li>
+            <li><a href="#">The Meaningless War of modern CPU</a></li>
+            <li><a href="#">Smart Phones are the new PCs</a></li>
+          </ul>
+        </div>
 
-          <div class="col-xs-12 col-md-4">
-            <ul>
-              <li><a href="#">Gear</a></li>
-              <li><a href="#">Mini Reviews</a></li>
-              <li><a href="#">Song of Week</a></li>
-            </ul>
-          </div>
+        <div class="sidebar col-xs-12 col-md-4">
+          <ul>
+            <li><a href="#">Gear</a></li>
+            <li><a href="#">Mini Reviews</a></li>
+            <li><a href="#">Song of Week</a></li>
+          </ul>
         </div>
       </div>
     </section>
