@@ -31,8 +31,6 @@
       font-size: 2em;
     }
     .self-intro {
-      margin-top: 1em;
-      margin-bottom: 2em;
       font-size: 1.1em;
     }
     .top-nav {
@@ -40,12 +38,21 @@
     }
     .top-nav li {
       display: inline-block;
+      padding: 4px 8px;
+      border: 1px solid #333;
     }
     .article-list {
+      margin-top: 1em;
       font-size: 1.5em;
     }
+    .article-list h1 {
+      border-bottom: 1px solid #aaa;
+      color: #aaa;
+      text-transform: uppercase;
+      font-size: .5em;
+    }
     .article-list li {
-      margin-bottom: 1em;
+      margin-top: .5em;
     }
     .sidebar {
       font-size: 1.5em;
@@ -74,22 +81,21 @@
       <div class="self-intro">
         <div class="row">
           <div class="col-xs-12">
-            Hi, I'm Kavin. I write about things I'm interested in.
-          </div>
-          <div class="col-xs-12">
             <ul class="top-nav">
+              <li><a href="/gear">About</a></li>
               <li><a href="/gear">Gear</a></li>
-              <li><a href="/gear">Gear</a></li>
-              <li><a href="/gear">Gear</a></li>
+              <li><a href="/gear">Gadget</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="article-list col-xs-12 col-md-8">
-          <!-- <h1>Article List</h1> -->
+          <h1>Article List</h1>
           <ul>
             <li><a href="/asus-gpu-zero-fan">Fix ASUS GPU Zero Fan Turning On and Off</a></li>
+            <li><a href="/asus-gpu-zero-fan">The Ultimate Answer to the Universe</a></li>
+            <li><a href="/asus-gpu-zero-fan">How to Avoid NIH Syndrome</a></li>
           </ul>
         </div>
       </div>
