@@ -39,7 +39,6 @@
     .top-nav li {
       display: inline-block;
       padding: 4px 8px;
-      border: 1px solid #333;
     }
     .article-list {
       margin-top: 1em;
@@ -82,9 +81,9 @@
         <div class="row">
           <div class="col-xs-12">
             <ul class="top-nav">
-              <li><a href="/about">About</a></li>
-              <li><a href="/gear">Gear</a></li>
-              <li><a href="/gadget">Gadget</a></li>
+              {% for page in pages %}
+              <li><a href="/pages/{{ page.slug }}">{{ page.metadata.title }}</a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -94,7 +93,7 @@
           <h1>Article List</h1>
           <ul>
             {% for post in posts %}
-            <li><a href="/{{ post.slug }}">{{ post.metadata.title }}</a></li>
+            <li><a href="/posts/{{ post.slug }}">{{ post.metadata.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
