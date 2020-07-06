@@ -38,17 +38,11 @@
     }
     .top-nav li {
       display: inline-block;
-      padding: 4px 8px;
+      padding: 4px 0px;
+      margin-right: 16px;
     }
     .article-list {
-      margin-top: 1em;
       font-size: 1.5em;
-    }
-    .article-list h1 {
-      border-bottom: 1px solid #aaa;
-      color: #aaa;
-      text-transform: uppercase;
-      font-size: .5em;
     }
     .article-list li {
       margin-top: .5em;
@@ -90,7 +84,6 @@
       </div>
       <div class="row">
         <div class="article-list col-xs-12 col-md-8">
-          <h1>Article List</h1>
           <ul>
             {% for post in posts %}
             <li><a href="/posts/{{ post.slug }}">{{ post.metadata.title }}</a></li>
