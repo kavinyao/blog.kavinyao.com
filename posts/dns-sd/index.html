@@ -51,7 +51,19 @@
       font-size: 1.2em;
     }
     .the-article h1 {
-      font-size: 1.25em;
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+    .the-article h2 {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .the-article h3 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .the-article h3 {
+      font-weight: bold;
     }
     .the-article>* {
       margin-bottom: 1em;
@@ -62,6 +74,12 @@
     table td {
       border: 1px solid #333;
       padding: 4px;
+    }
+    pre, code, tt {
+      font-family: "Jetbrains Mono", Menlo, Consolas, monospace;
+    }
+    pre {
+      white-space: pre-line;
     }
   </style>
  </head>
@@ -115,9 +133,7 @@
      <p>
       You start the service discovery process with this command:
      </p>
-     <p>
-      <code>
-       % dns-sd  -B  _services._dns-sd._udp  local.
+     <pre><code>% dns-sd  -B  _services._dns-sd._udp  local.
 Browsing for _services._dns-sd._udp.local.
 DATE: ---Sat 04 Jul 2020---
 22:39:00.155  ...STARTING...
@@ -135,17 +151,14 @@ Timestamp     A/R    Flags  if Domain               Service Type         Instanc
 22:39:00.932  Add        3   4 .                    _tcp.local.          _device-info
 22:39:00.932  Add        2   4 .                    _tcp.local.          _afpovertcp
 22:39:01.238  Add        2   4 .                    _tcp.local.          _alexa
-      </code>
-     </p>
+</code></pre>
      <p>
       You can see some familiar names in it, e.g. Chromecast (googlecast), Spotify and Alex.
      </p>
      <p>
       Now let's see which devices are running Chromecast:
      </p>
-     <p>
-      <code>
-       % dns-sd -B _googlecast._tcp local.
+     <pre><code>% dns-sd -B _googlecast._tcp local.
 Browsing for _googlecast._tcp.local.
 DATE: ---Sat 04 Jul 2020---
 22:42:52.056  ...STARTING...
@@ -153,33 +166,26 @@ Timestamp     A/R    Flags  if Domain               Service Type         Instanc
 22:42:52.057  Add        3   4 local.               _googlecast._tcp.    Chromecast-b838&lt;...&gt;
 22:42:52.057  Add        3   4 local.               _googlecast._tcp.    Chromecast-df0d&lt;...&gt;
 22:42:52.057  Add        2   4 local.               _googlecast._tcp.    Chromecast-Ultra-1234&lt;...&gt;
-      </code>
-     </p>
+</code></pre>
      <p>
       Looks like on my local network there are 3 Chromecast devices. Let's get more information of the Chromecast Ultra:
      </p>
-     <p>
-      <code>
-       % dns-sd -L Chromecast-Ultra-1234&lt;...&gt; _googlecast._tcp local.
+     <pre><code>% dns-sd -L Chromecast-Ultra-1234&lt;...&gt; _googlecast._tcp local.
 Lookup Chromecast-Ultra-1234&lt;...&gt;._googlecast._tcp.local.
 DATE: ---Sat 04 Jul 2020---
 22:44:11.610  ...STARTING...
 22:44:11.611  Chromecast-Ultra-1234&lt;...&gt;._googlecast._tcp.local. can be reached at 1234d567-89ab-cdef-1234-56789abcdef0.local.:8009 (interface 4)
  id=1234&lt;...&gt; cd=43DD&lt;...&gt; rm= ve=05 md=Chromecast\ Ultra ic=/setup/icon.png fn=Dining\ Table ca=200709 st=0 bs=FA8FCA5D4DCF nf=1 rs=
-      </code>
-     </p>
+</code></pre>
      <p>
       You can see a bunch of metadata, including the user assigned device name (Dining Table). Also notice the address in the "can the reached at" section. Use it we can get the IP of the device:
      </p>
-     <p>
-      <code>
-       % dns-sd -G v4v6 1234d567-89ab-cdef-1234-56789abcdef0.local.
+     <pre><code>% dns-sd -G v4v6 1234d567-89ab-cdef-1234-56789abcdef0.local.
 DATE: ---Sat 04 Jul 2020---
 22:48:15.421  ...STARTING...
 Timestamp     A/R    Flags if Hostname                                    Address                                      TTL
 22:48:15.421  Add 40000002  4 1234d567-89ab-cdef-1234-56789abcdef0.local. 192.168.1.71                                 120
-      </code>
-     </p>
+</code></pre>
      <p>
       Bingo. Its IP is
       <code>
