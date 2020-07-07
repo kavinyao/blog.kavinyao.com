@@ -28,7 +28,7 @@ You start the service discovery process with this command:
     22:39:00.932  Add        2   4 .                    _tcp.local.          _afpovertcp
     22:39:01.238  Add        2   4 .                    _tcp.local.          _alexa
 
-You can see some familiar names in it, e.g. Chromecast (googlecast), Spotify and Alex.
+You can see some familiar names in it, e.g. Chromecast (googlecast), Spotify and Alexa.
 
 Now let's see which devices are running Chromecast:
 
