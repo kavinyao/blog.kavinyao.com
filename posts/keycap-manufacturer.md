@@ -67,4 +67,4 @@ Verdict: I only have 1 KAT set so far and I love it. I have high hopes for it to
 
 ## Infinikey
 
-Infinikey manufactures ABS double-shot keycap sets in Cherry profile. It's mostly a cheaper version of GMK. I have 1 set en route and will update this post once I have my hands on it.
+Infinikey manufactures PBT dye-sub keycap sets in Cherry profile. It's also a cheaper option compared to GMK. I have 1 set en route and will update this post once I have my hands on it.
