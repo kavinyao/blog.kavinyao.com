@@ -24,6 +24,6 @@ It may happen if you boot to Windows 10, Windows Boot Manager will override grub
 - open an admin command line in Windows 10
 - run `bcdedit /enum firmware`
 - note down the grub EFI path
-- run `bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi` (it was `\EFI\ubuntu\shimx64.efi` in my case)
+- run `bcdedit /set {bootmgr} path <<insert_path>>` (the path was `\EFI\ubuntu\shimx64.efi` in my case)
 
 After that Windows Boot Manager will boot with grub.
