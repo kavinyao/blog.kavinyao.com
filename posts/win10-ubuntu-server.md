@@ -15,7 +15,7 @@ Finally, turn off Secure Boot from BIOS. According to Internet, if Secure Boot i
 
 ## Installation
 
-Plug in the USB stick and boot from it. I mostly followed [the official guide](https://ubuntu.com/tutorials/install-ubuntu-server). The only thing to pay attention to is in the "Configure Storage" step, make sure you select the option other than "Use An Entire Disk" as that'll erase Windows and in the next step select the new ext4 partition you just created, format as ext4 (again) and mount it to `/`. Check out this [imgur album](https://imgur.com/a/hYxdxVj) for demo. After that, continue the installation it should complete installation and set grub as the default UEFI boot device.
+Plug in the USB stick and boot from it. Again, I mostly followed [the official guide](https://ubuntu.com/tutorials/install-ubuntu-server). The only thing to pay attention to is in the "Configure Storage" step, make sure you select the option other than "Use An Entire Disk" as that'll erase Windows and in the next step select the new ext4 partition you just created, format as ext4 (again) and mount it to `/`. Check out this [imgur album](https://imgur.com/a/hYxdxVj) for demo. After that, continue the installation it should complete installation and set grub as the default UEFI boot device.
 
 ## Post Installation
 
