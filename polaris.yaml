@@ -1,3 +1,13 @@
+post:
+  - posts
+  - pages
+index:
+  -
+    path: /
+    template: home
+    depends_on:
+      - posts
+      - pages
 copy:
   - CNAME
   - favicon.ico
