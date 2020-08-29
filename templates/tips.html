@@ -57,6 +57,9 @@
     .sidebar li {
       margin-bottom: .5em;
     }
+    .breadcrumb-nav {
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
@@ -70,23 +73,17 @@
     </header>
 
     <section id="main">
-      <div class="self-intro">
-        <div class="row">
-          <div class="col-xs-12">
-            <ul class="top-nav">
-              <li><a href="/tips/">Tips</a></li>
-              {% for page in pages %}
-              <li><a href="/pages/{{ page.slug }}">{{ page.metadata.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
+      <div class="row">
+        <div class="breadcrumb-nav col-xs-12">
+          <a href="/">&#x2190; Back</a>
         </div>
       </div>
+
       <div class="row">
         <div class="article-list col-xs-12">
           <ul>
-            {% for post in posts|sort(attribute="metadata.date", reverse=True) %}
-            <li><a href="/posts/{{ post.slug }}">{{ post.metadata.title }}</a></li>
+            {% for post in tips|sort(attribute="metadata.date", reverse=True) %}
+            <li><a href="/tips/{{ post.slug }}">{{ post.metadata.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
