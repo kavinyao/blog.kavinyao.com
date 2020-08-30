@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Discover Local Chromecast Devices Using DNS-SD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: #333;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    p>a {
+      text-decoration: underline;
+    }
+    header {
+      margin-top: 1em;
+    }
+    header h1 {
+      font-size: 2em;
+    }
+    .sidebar {
+      font-size: 1.5em;
+    }
+    .sidebar ul {
+      border: 1px #333;
+      border-left-style: solid;
+      padding-left: 1em;
+    }
+    .sidebar li {
+      margin-bottom: .5em;
+    }
+    .breadcrumb-nav {
+      margin-top: 1em;
+    }
+    .the-article {
+      margin-top: 1em;
+      font-size: 1.2em;
+    }
+    .the-article h1 {
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+    .the-article h2 {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .the-article h3 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .the-article h3 {
+      font-weight: bold;
+    }
+    .the-article>* {
+      margin-bottom: 1em;
+    }
+    .the-article p {
+      line-height: 1.2em;
+    }
+    table td {
+      border: 1px solid #333;
+      padding: 4px;
+    }
+    pre, code, tt {
+      font-family: "Jetbrains Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .9em;
+      background: #343434;
+      border-radius: 5px;
+      color: #fff;
+    }
+    pre {
+      white-space: pre-line;
+      padding: 10px;
+      line-height: 1.2em;
+    }
+    code {
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+    pre>code {
+      font-size: inherit;
+      padding: 0px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+      line-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>
+          <a href="/">Kavin Yao</a>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <section id="main">
+    <div class="row">
+      <div class="breadcrumb-nav col-xs-12">
+        <a href="/">&#x2190; Back</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="the-article col-xs-12">
+        <h1>Discover Local Chromecast Devices Using DNS-SD</h1>
+
+        
+        <p>I always wondered how Chromecast devices are magically detected by different apps. And Spotify allows me to play music from my Sony SRS-X77 speaker. How does Spotify even know that speaker exists?</p>
+
+<p>Well, it turns out this is powered by <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking#DNS-SD">DNS Service Discovery</a>. In fact you can use command line tools to <a href="https://apple.stackexchange.com/a/239039/91868">emulate the discovery process</a>. macOS has <code>dns-sd</code> tool builtin (for other OS you can use <a href="https://www.avahi.org/">Avahi</a>).</p>
+
+<p>You start the service discovery process with this command:</p>
+
+<pre><code>% dns-sd  -B  _services._dns-sd._udp  local.
+Browsing for _services._dns-sd._udp.local.
+DATE: ---Sat 04 Jul 2020---
+22:39:00.155  ...STARTING...
+Timestamp     A/R    Flags  if Domain               Service Type         Instance Name
+22:39:00.156  Add        3   4 .                    _tcp.local.          _http
+22:39:00.156  Add        3   4 .                    _tcp.local.          _spotify-connect
+22:39:00.156  Add        2   4 .                    _tcp.local.          _companion-link
+22:39:00.397  Add        3   4 .                    _tcp.local.          _googlezone
+22:39:00.397  Add        2   4 .                    _tcp.local.          _googlecast
+22:39:00.397  Add        2   1 .                    _tcp.local.          _companion-link
+22:39:00.499  Add        3   4 .                    _tcp.local.          _nvstream_dbd
+22:39:00.802  Add        3   4 .                    _tcp.local.          _printer
+22:39:00.802  Add        2   4 .                    _tcp.local.          _ipp
+22:39:00.932  Add        3   4 .                    _tcp.local.          _smb
+22:39:00.932  Add        3   4 .                    _tcp.local.          _device-info
+22:39:00.932  Add        2   4 .                    _tcp.local.          _afpovertcp
+22:39:01.238  Add        2   4 .                    _tcp.local.          _alexa
+</code></pre>
+
+<p>You can see some familiar names in it, e.g. Chromecast (googlecast), Spotify and Alexa.</p>
+
+<p>Now let's see which devices are running Chromecast:</p>
+
+<pre><code>% dns-sd -B _googlecast._tcp local.
+Browsing for _googlecast._tcp.local.
+DATE: ---Sat 04 Jul 2020---
+22:42:52.056  ...STARTING...
+Timestamp     A/R    Flags  if Domain               Service Type         Instance Name
+22:42:52.057  Add        3   4 local.               _googlecast._tcp.    Chromecast-b838&lt;...&gt;
+22:42:52.057  Add        3   4 local.               _googlecast._tcp.    Chromecast-df0d&lt;...&gt;
+22:42:52.057  Add        2   4 local.               _googlecast._tcp.    Chromecast-Ultra-1234&lt;...&gt;
+</code></pre>
+
+<p>Looks like on my local network there are 3 Chromecast devices. Let's get more information of the Chromecast Ultra:</p>
+
+<pre><code>% dns-sd -L Chromecast-Ultra-1234&lt;...&gt; _googlecast._tcp local.
+Lookup Chromecast-Ultra-1234&lt;...&gt;._googlecast._tcp.local.
+DATE: ---Sat 04 Jul 2020---
+22:44:11.610  ...STARTING...
+22:44:11.611  Chromecast-Ultra-1234&lt;...&gt;._googlecast._tcp.local. can be reached at 1234d567-89ab-cdef-1234-56789abcdef0.local.:8009 (interface 4)
+ id=1234&lt;...&gt; cd=43DD&lt;...&gt; rm= ve=05 md=Chromecast\ Ultra ic=/setup/icon.png fn=Dining\ Table ca=200709 st=0 bs=FA8FCA5D4DCF nf=1 rs=
+</code></pre>
+
+<p>You can see a bunch of metadata, including the user assigned device name (Dining Table). Also notice the address in the "can the reached at" section. Use it we can get the IP of the device:</p>
+
+<pre><code>% dns-sd -G v4v6 1234d567-89ab-cdef-1234-56789abcdef0.local.
+DATE: ---Sat 04 Jul 2020---
+22:48:15.421  ...STARTING...
+Timestamp     A/R    Flags if Hostname                                    Address                                      TTL
+22:48:15.421  Add 40000002  4 1234d567-89ab-cdef-1234-56789abcdef0.local. 192.168.1.71                                 120
+</code></pre>
+
+<p>Bingo. Its IP is <code>192.168.1.71</code>. And now you know how the googlecast library locates the Chromecast devices.</p>
+
+        
+      </div>
+    </div>
+  </section>
+  <footer>
+  </footer>
+</body>
+</html>
