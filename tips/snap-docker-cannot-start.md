@@ -3,7 +3,7 @@ date: 2020-08-28
 
 ---
 
-Recently I [repurposed my NUC](/posts/win10-ubuntu-server/) as a home server. At the moment it's only running a small Django app backed by Postgres. The Postgres instance runs as a Docker container.
+Recently I [repurposed my NUC](/posts/win10-ubuntu-server/) to a home server. At the moment it's only running a small Django app backed by Postgres. The Postgres instance runs as a Docker container.
 
 The other day there was a random power outage. After booting the server I assumed everything would be up and running given that all of them are managed by systemd. Well, almost – everything was up except Postgres, or more precisely, Docker. This is what the log looks like
 
