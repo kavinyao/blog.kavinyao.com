@@ -3,7 +3,7 @@ date: 2020-09-08
 
 ---
 
-I've been using NZXT H400 for over 2 years. It's a very good looking and well-built case despite the price tag. Initially I transferred my then ITX build into it and needless to say lots of space was wasted. When I [switched from Intel to AMD](/goodbye-intel-hello-amd), I took the opportunity and upgraded to an mATX system — the largest form factor H400 supports. mATX is so much better compared to ITX for those who don't need extreme compactness. With the positive experience with mATX I totally see myself getting an ATX build eventually, given that a compact mid-tower case is not much bigger than H400 (in fact H510 is only 12% larger than H400 in terms of volume).
+I've been using NZXT H400 for over 2 years. It's a very good looking and well-built case despite the price tag. Initially I transferred my then ITX build into it and needless to say lots of space was wasted. When I [switched from Intel to AMD](/posts/goodbye-intel-hello-amd), I took the opportunity and upgraded to an mATX system — the largest form factor H400 supports. mATX is so much better compared to ITX for those who don't need extreme compactness. With the positive experience with mATX I totally see myself getting an ATX build eventually, given that a compact mid-tower case is not much bigger than H400 (in fact H510 is only 12% larger than H400 in terms of volume).
 
 Recently I need to swap out the PSU from my H400 build which presented a perfect opportunity to upgrade the case. To summarize, the reasons I move away from H400 include:
 
