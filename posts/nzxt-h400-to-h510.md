@@ -26,4 +26,15 @@ The reasons I chose H510:
 
 Basically all my problems with H400 are fixed in H510.
 
-There's one thing I don't like H500: thermals and noise. Since I literally transplanted my mATX build from H400 to H510, the only variable is the case. And the fans are running noticeably louder and CPU temp is also higher at idle or load. This is not a surprise though since [plenty of](https://www.youtube.com/watch?v=7HK5Aulw7YI) [reviews](https://www.youtube.com/watch?v=_ixFt7h8fak) have pointed out this problem. [Some](https://www.youtube.com/watch?v=ApdliGCqtZg) even suggested not using any front in-take fans as they don't help with reducing CPU temp at load. I found this claim to be true but having front in-take fans will help CPU idle temp, which I consider a win. I'll use it for a few more days and decide if the noise is tolerable.
+The only thing I don't like about H510 is the worse acoustics. This is not a surprise though since [plenty of](https://www.youtube.com/watch?v=7HK5Aulw7YI) [reviews](https://www.youtube.com/watch?v=_ixFt7h8fak) have pointed out this problem. [Some](https://www.youtube.com/watch?v=ApdliGCqtZg) even suggested not using any front in-take fans as they don't help with reducing CPU temp at load (although I found this claim to be true but having front in-take fans will help CPU idle temp). Luckily, this problem is not unsolvable at a small cost of performance. Since I'm not using any hard drives, the only source of noise is the fans. Apart from the sheer loudness at high load, variation of fan speed within a short time window also introduces additional unpleasant sound (especially when some hardware has zero-fan mode). The tunings I did:
+
+- I added 2 front in-take fans which helps bring down temps (and noise) when system is idle.
+- For CPU and chassis fans, I set fan speed at a constant value if CPU temperature is below 55°C and a linear increase up towards 90°C.
+- For GPU, I lowered boost clock and power target as well as set a [fan curve](/posts/asus-gpu-zero-fan) that effectively disables zero-fan mode.
+
+Things I tried but didn't work out:
+
+- moving down GPU to the second X16 slot
+- lower minimum processor state in Windows 10's power plan options
+
+It wasn't an easy process to tune the acoustics since it's largely an art instead of science. Although there are lots of resources online not many of them are actual useful. At one stage I was even considering swapping in an after-market cooler on the GPU and ditching the new case. However I did learn new techniques and the final setup is actually quieter than my H400 build. And I'm pretty satisfied with the result.
