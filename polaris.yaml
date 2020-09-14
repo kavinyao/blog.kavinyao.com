@@ -1,7 +1,6 @@
 post:
   - posts
   - pages
-  - tips
 index:
   -
     path: /
@@ -9,11 +8,6 @@ index:
     depends_on:
       - posts
       - pages
-  -
-    path: /tips
-    template: tips
-    depends_on:
-      - tips
 copy:
   - CNAME
   - favicon.ico

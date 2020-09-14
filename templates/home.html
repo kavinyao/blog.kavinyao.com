@@ -44,18 +44,11 @@
       font-size: 1.5em;
     }
     .article-list li {
-      margin-top: .5em;
+      margin-top: 15px;
     }
-    .sidebar {
-      font-size: 1.5em;
-    }
-    .sidebar ul {
-      border: 1px #333;
-      border-left-style: solid;
-      padding-left: 1em;
-    }
-    .sidebar li {
-      margin-bottom: .5em;
+    .article-list li.post-type-secondary a {
+      font-size: 0.75em;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -74,7 +67,6 @@
         <div class="row">
           <div class="col-xs-12">
             <ul class="top-nav">
-              <li><a href="/tips/">Tips</a></li>
               {% for page in pages %}
               <li><a href="/pages/{{ page.slug }}">{{ page.metadata.title }}</a></li>
               {% endfor %}
@@ -86,7 +78,7 @@
         <div class="article-list col-xs-12">
           <ul>
             {% for post in posts|sort(attribute="metadata.date", reverse=True) %}
-            <li><a href="/posts/{{ post.slug }}">{{ post.metadata.title }}</a></li>
+            <li{% if 'type' in post.metadata %} class="post-type-{{post.metadata.type}}"{% endif %}><a href="/posts/{{ post.slug }}">{{ post.metadata.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
