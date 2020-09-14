@@ -44,18 +44,11 @@
       font-size: 1.5em;
     }
     .article-list li {
-      margin-top: .5em;
+      margin-top: 15px;
     }
-    .sidebar {
-      font-size: 1.5em;
-    }
-    .sidebar ul {
-      border: 1px #333;
-      border-left-style: solid;
-      padding-left: 1em;
-    }
-    .sidebar li {
-      margin-bottom: .5em;
+    .article-list li.post-type-secondary a {
+      font-size: 0.75em;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -74,7 +67,6 @@
         <div class="row">
           <div class="col-xs-12">
             <ul class="top-nav">
-              <li><a href="/tips/">Tips</a></li>
               
               <li><a href="/pages/about">About</a></li>
               
@@ -87,6 +79,8 @@
           <ul>
             
             <li><a href="/posts/nzxt-h400-to-h510">Transition from NZXT H400 to H510</a></li>
+            
+            <li class="post-type-secondary"><a href="/posts/snap-docker-cannot-start">Docker Fails to Start After Power Outage</a></li>
             
             <li><a href="/posts/win10-ubuntu-server">Install Ubuntu Server on Windows 10 PC</a></li>
             
