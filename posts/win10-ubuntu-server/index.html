@@ -20,6 +20,22 @@
       color: inherit;
       text-decoration: none;
     }
+    strong {
+      font-weight: bold;
+    }
+    em {
+      font-style: italic;
+    }
+    sub {
+      font-size: smaller;
+    }
+    blockquote {
+      border-left: 10px solid #eee;
+      padding-left: 1em;
+    }
+    blockquote>* {
+      margin-bottom: 10px;
+    }
     header {
       margin-top: 1em;
     }
@@ -67,6 +83,15 @@
     }
     .the-article a {
       text-decoration: underline;
+    }
+    .title-group {
+      border-left: 1px solid #888;
+      padding-left: 8px;
+    }
+    .title-group h2 {
+      margin-top: 5px;
+      padding-left: 2px;
+      font-weight: normal;
     }
     table td {
       border: 1px solid #333;
@@ -118,7 +143,9 @@
     </div>
     <div class="row">
       <div class="the-article col-xs-12">
+        
         <h1>Install Ubuntu Server on Windows 10 PC</h1>
+        
 
         
         <p>I've been having lots of fun with home networking recently. Now that I'm in the rabbit hole I've reached the stage of needing a dedicated home server. For now the server will only run an nginx server as reverse proxy. Before I splurge on a new server, I want to see if I can repurpose any existing hardware for this – and my eyes fell on the <a href="/nuc">NUC</a>, which is supposed to be the living room PC but it's not getting used at all sitting in the living room. Since I <em>may</em> actually use it for entertainment in the future and this is an experiment I don't want to fully convert it to a Linux box so I want to have dual boot so I can still switch back to Windows 10 when I need. I chose the good old Ubuntu Linux distro, specifically 20.04 LTS server version. I chose server because of the much smaller footprint compared to desktop version (and CLI is just way cooler than GUI). As it turns out the installation of Ubuntu server isn't as dummy proof as desktop so the journey wasn't as smooth as expected. Here's the steps I <strike>took</strike> should have taken, just for posterity.</p>

@@ -20,6 +20,22 @@
       color: inherit;
       text-decoration: none;
     }
+    strong {
+      font-weight: bold;
+    }
+    em {
+      font-style: italic;
+    }
+    sub {
+      font-size: smaller;
+    }
+    blockquote {
+      border-left: 10px solid #eee;
+      padding-left: 1em;
+    }
+    blockquote>* {
+      margin-bottom: 10px;
+    }
     header {
       margin-top: 1em;
     }
@@ -67,6 +83,15 @@
     }
     .the-article a {
       text-decoration: underline;
+    }
+    .title-group {
+      border-left: 1px solid #888;
+      padding-left: 8px;
+    }
+    .title-group h2 {
+      margin-top: 5px;
+      padding-left: 2px;
+      font-weight: normal;
     }
     table td {
       border: 1px solid #333;
@@ -118,7 +143,9 @@
     </div>
     <div class="row">
       <div class="the-article col-xs-12">
+        
         <h1>The NUC Experience</h1>
+        
 
         
         <p>One year after my <a href="/posts/surface-go">failed Surface Go as living room PC experiment</a>, I'm still living in the pain of having to run down stairs to cast a tab to my living room TV. I seem to have run out of options since so far I have crossed out iPad (Chrome iOS app doesn't support tab cast), Windows tablet (not powerful enough), cheap Windows laptop (bulky for living room use, short battery life) and ITX PC (bulky, overkill even with lowest spec, potential thermal issue).</p>
