@@ -68,6 +68,15 @@
     .the-article a {
       text-decoration: underline;
     }
+    .title-group {
+      border-left: 1px solid #888;
+      padding-left: 8px;
+    }
+    .title-group h2 {
+      margin-top: 5px;
+      padding-left: 2px;
+      font-weight: normal;
+    }
     table td {
       border: 1px solid #333;
       padding: 4px;
@@ -118,7 +127,14 @@
     </div>
     <div class="row">
       <div class="the-article col-xs-12">
+        {% if 'subtitle' in post.metadata %}
+        <hgroup class="title-group">
+          <h1>{{ post.metadata.title }}</h1>
+          <h2>{{ post.metadata.subtitle }}</h2>
+        </hgroup>
+        {% else %}
         <h1>{{ post.metadata.title }}</h1>
+        {% endif %}
 
         {% autoescape false %}
         {{ post.content_html }}
