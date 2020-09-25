@@ -61,25 +61,27 @@
       font-size: 1.2em;
     }
     .the-article h1 {
-      font-size: 1.4em;
+      font-size: 30px;
       font-weight: bold;
     }
     .the-article h2 {
-      font-size: 1.1em;
+      font-size: 26px;
       font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
     }
     .the-article h3 {
+      font-size: 22px;
       font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
       text-transform: uppercase;
-    }
-    .the-article h3 {
-      font-weight: bold;
     }
     .the-article>* {
       margin-bottom: 1em;
     }
     .the-article p {
-      line-height: 1.2em;
+      line-height: 1.35em;
     }
     .the-article a {
       text-decoration: underline;
@@ -163,7 +165,7 @@
 
 <p><strong>At the very first second I started using this MacBook, one problem was obvious: it's loud.</strong> To be fair, for thin laptops like MacBooks, high RPM fans are a must have in order to keep CPU and GPU temperatures in check under load. However, when the system is idle the fan noise should be inaudible as it should be spinning at low RPM. I kept the exact same setup but switched the laptop. Clearly the new laptop is to blame. Since I have super low tolerance toward noise, I gotta find a solution.</p>
 
-<p>There's also the possibility that I got a defective product but the amount of discussions on <a href="http://discussions.apple.com">discussions.apple.com</a>, Reddit and StackOverflow suggest otherwise. And the thermal problem is not specific to the 16" model: people reported similar fan noise problems on previous generations of 15" models too. <strong>As always there are lots of information you can find online but very few of them are actually useful.</strong> Suggested solutions (that seems legit) include resetting SMC, using the right thunderbolt ports, use integrated graphics (iGPU) instead of discrete graphics (dGPU) when possible. However none of them worked for me.</p>
+<p>There's also the possibility that I got a defective product but the amount of discussions on <a href="http://discussions.apple.com">discussions.apple.com</a>, Reddit and StackOverflow suggest otherwise. And the thermal problem is not specific to the 16" model: people reported similar fan noise problems on previous generations of 15" models too. As always there are lots of information you can find online but very few of them are actually useful. Suggested solutions (that seems legit) include resetting SMC, using the right thunderbolt ports, use integrated graphics (iGPU) instead of discrete graphics (dGPU) when possible. However none of them worked for me.</p>
 
 <p>I was able to get a few things are confirmed though:</p>
 
@@ -239,11 +241,11 @@
 <li>After: CPU temp 45°C, dGPU temp 35°C, fan speed &lt; 1800RPM, noise level &lt; 40dBA (reads: total silence)</li>
 </ul>
 
-<p><strong>The best thing is, even when CPU is occasionally under heavy load and CPU temp goes up to 80°C, the fan still spins under 2000RPM which is super quiet.</strong> I was expecting an improvement but my expectation was nowhere close to this. I was blown away.</p>
+<p>The <em>best</em> thing is, even when CPU is occasionally under heavy load and CPU temp goes up to 80°C, the fan still spins under 2000RPM which is super quiet. I was expecting an improvement but my expectation was nowhere close to this. I was blown away.</p>
 
 <h3>Eliminating the Last Bit of Noise</h3>
 
-<p>If this is a fairy tale, it should end here. But in reality there are always some caveats. Although the eGPU greatly improved overall system acoustics, itself adds another source of noise from the PSU fan. The fan noise is not noticeable in day time and, especially when it's put under the desk. However, the PSU fan is always on and I cannot put up with the low humming noise when I try to sleep. <strong>Long story short because I don't want to manually turn the eGPU off after work every day, I replaced the builtin PSU with another that turns off the fan during light load.</strong></p>
+<p>If this is a fairy tale, it should end here. But in reality there are always some caveats. Although the eGPU greatly improved overall system acoustics, itself adds another source of noise from the PSU fan. The fan noise is not noticeable in day time and, especially when it's put under the desk. However, the PSU fan is always on and I cannot put up with the low humming noise when I try to sleep. Long story short because I don't want to manually turn the eGPU off after work every day, <strong>I replaced the builtin PSU with another that turns off the fan during light load.</strong></p>
 
 <p>However swapping the PSU didn't fix the problem completely. I noticed that before the PSU swap, when MacBook is sleeping, the power draw of eGPU is about 8W. But now it's about 35W. The new PSU is likely not the problem because it's actually more power efficient than the previous one. What changed? After some digging I found out that it's because Core X is actually charging MacBook during its sleep. I also learned that <strong>when multiple ThunderBolt devices with power delivery capability are connected, MacBook always prefer the one that delivers the most power</strong>. In my case, I have 2 TB3 devices connected to the MacBook: TS3+ delivers 85W power and Core X delivers 100W power. Therefore MacBook prefers to draw power from Core X. But why did the behavior change though? I have no idea. Anyway we got a problem because it turns out the PSU fan does spin when continuous power needs to be delivered despite having zero fan mode. (I later found out that the fan noise is unnoticeable but at that point I was so obsessed with eliminating PSU fan noise I had to find a solution.)</p>
 
@@ -262,7 +264,7 @@
 
 <h2>Conclusion</h2>
 
-<p>So, is the eGPU worth it? It fixes the major noise problem I had but the journey to get everything to the ideal state was long. If I could go back in time with the knowledge I have now, I would first try dual external monitor and see if it fixes the problem. If it does, I wouldn't go down the eGPU route as it's not worry free.</p>
+<p>So, is the eGPU worth it? It fixes the major noise problem I had but the journey to get everything to the ideal state was long. Honestly, had I not switched to 16" MacBook, I wouldn't have all these problems in the first place. Now that the problem is identified, I would stick with my 13" MacBook but use two external monitors instead (i.e. keep my office setup).</p>
 
 <h3>The COVID Impact Is Real</h3>
 
@@ -271,10 +273,6 @@
 <p>For the components I used here, the Core X and RX 580 were bought at regular price. But I had to pay additional money for the Dell monitor and EVGA PSU. A Corsair PSU was my first choice but they are so sought after that it's impossible to buy one without paying 50% more (sometimes even double the MSRP price).</p>
 
 <p>The shipping speed is slower too.</p>
-
-<h3>Revisit the Problem</h3>
-
-<p>Given that adding the eGPU to my setup fixes the temp issue, the theory that dGPU is generating too much heat (and reducing its load reduces thermal output) seems to hold. However, I also wonder if the thermal problem I had was due to using both internal display and external monitor. And I'm curious what would happen if I didn't use internal display but use two external 4K monitors instead. <strong>I used to run dual external monitors at work with MacBook lid closed and I never experienced noticeable thermal issue so it's very likely that using both internal and external monitor is the problem.</strong> Unfortunately I don't have a second 4K monitor at hand, there's no way for me to verify.</p>
 
 <h3>Final Thoughts</h3>
 
