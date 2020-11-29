@@ -24,9 +24,9 @@ It turns out this is a Python script:
 
 What it does is basically calling `landscape.sysinfo.deployment.run`. We can find the file from Python repl:
 
->>> from landscape.sysinfo import deployment
->>> deployment.__file__
-'/usr/lib/python3/dist-packages/landscape/sysinfo/deployment.py'
+    >>> from landscape.sysinfo import deployment
+    >>> deployment.__file__
+    '/usr/lib/python3/dist-packages/landscape/sysinfo/deployment.py'
 
 In `deployment.py` we can find all the plugins and the temperature plugin is from `temperature.py`, which calls `landscape.lib.sysstats.get_thermal_zones` and reports the highest temperature. If we open `sysstats.py` we can find the definition of this function:
 
