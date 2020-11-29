@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Temperature in Ubuntu MOTD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: #333;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    strong {
+      font-weight: bold;
+    }
+    em {
+      font-style: italic;
+    }
+    sub {
+      font-size: smaller;
+    }
+    blockquote {
+      border-left: 10px solid #eee;
+      padding-left: 1em;
+    }
+    blockquote>* {
+      margin-bottom: 10px;
+    }
+    header {
+      margin-top: 1em;
+    }
+    header h1 {
+      font-size: 2em;
+    }
+    .sidebar {
+      font-size: 1.5em;
+    }
+    .sidebar ul {
+      border: 1px #333;
+      border-left-style: solid;
+      padding-left: 1em;
+    }
+    .sidebar li {
+      margin-bottom: .5em;
+    }
+    .breadcrumb-nav {
+      margin-top: 1em;
+    }
+    .the-article {
+      margin-top: 1em;
+      font-size: 1.2em;
+    }
+    .the-article h1 {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .the-article h2 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    .the-article h3 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .the-article>* {
+      margin-bottom: 1em;
+    }
+    .the-article p {
+      line-height: 1.35em;
+    }
+    .the-article a {
+      text-decoration: underline;
+    }
+    .title-group {
+      border-left: 1px solid #888;
+      padding-left: 8px;
+    }
+    .title-group h2 {
+      margin-top: 5px;
+      padding-left: 2px;
+      font-weight: normal;
+    }
+    table td {
+      border: 1px solid #333;
+      padding: 4px;
+    }
+    pre, code, tt {
+      font-family: "Jetbrains Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .9em;
+      background: #343434;
+      border-radius: 5px;
+      color: #fff;
+    }
+    pre {
+      white-space: pre-line;
+      padding: 10px;
+      line-height: 1.2em;
+    }
+    code {
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+    pre>code {
+      font-size: inherit;
+      padding: 0px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+      line-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>
+          <a href="/">Kavin Yao</a>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <section id="main">
+    <div class="row">
+      <div class="breadcrumb-nav col-xs-12">
+        <a href="/">&#x2190; Back</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="the-article col-xs-12">
+        
+        <h1>Temperature in Ubuntu MOTD</h1>
+        
+
+        
+        <p>I recently built a home server with spare parts and installed Ubuntu server on it. I want to make sure the temps are good since the server is going to run 24/7. Besides the <code>sensors</code> command, I noticed that the <a href="https://en.wikipedia.org/wiki/Motd_(Unix)">MOTD</a> also reports a temperature. Like this:</p>
+
+<pre><code>System information as of Fri 27 Nov 2020 10:56:18 AM UTC
+
+System load:  0.0                Temperature:     36.0 C
+Usage of /:   1.4% of 456.96GB   Processes:       168
+Memory usage: 2%                 Users logged in: 0
+Swap usage:   0%                 IPv4 address:    192.168.1.111
+</code></pre>
+
+<p>This is pretty neat but what temperature is it? And what API is used to get it?</p>
+
+<p>A quick Google search led us to <a href="https://askubuntu.com/questions/319528/how-to-see-the-details-which-ubuntu-shows-at-the-time-of-login-anytime#comment1635612_939579">how MOTD is generated</a>. The script that generates the system information part is <code>/etc/update-motd.d/50-landscape-sysinfo</code>, which calls <code>/usr/bin/landscape-sysinfo</code>.</p>
+
+<p>It turns out this is a Python script:</p>
+
+<pre><code>$ file /usr/bin/landscape-sysinfo
+/usr/bin/landscape-sysinfo: Python script, ASCII text executable
+</code></pre>
+
+<p>What it does is basically calling <code>landscape.sysinfo.deployment.run</code>. We can find the file from Python repl:</p>
+
+<pre><code>&gt;&gt;&gt; from landscape.sysinfo import deployment
+&gt;&gt;&gt; deployment.__file__
+'/usr/lib/python3/dist-packages/landscape/sysinfo/deployment.py'
+</code></pre>
+
+<p>In <code>deployment.py</code> we can find all the plugins and the temperature plugin is from <code>temperature.py</code>, which calls <code>landscape.lib.sysstats.get_thermal_zones</code> and reports the highest temperature. If we open <code>sysstats.py</code> we can find the definition of this function:</p>
+
+<pre><code>def get_thermal_zones(thermal_zone_path=None):
+    if thermal_zone_path is None:
+        if os.path.isdir("/sys/class/thermal"):
+            thermal_zone_path = "/sys/class/thermal"
+        else:
+            thermal_zone_path = "/proc/acpi/thermal_zone"
+    if os.path.isdir(thermal_zone_path):
+        for zone_name in sorted(os.listdir(thermal_zone_path)):
+            yield ThermalZone(thermal_zone_path, zone_name)
+</code></pre>
+
+<p>We can use it in action:</p>
+
+<pre><code>&gt;&gt;&gt; from landscape.lib.sysstats import get_thermal_zones
+&gt;&gt;&gt; tzs = get_thermal_zones()
+&gt;&gt;&gt; for tz in tzs:
+...   print(tz.path, tz.temperature)
+...
+/sys/class/thermal/cooling_device0 None
+/sys/class/thermal/cooling_device1 None
+/sys/class/thermal/cooling_device2 None
+/sys/class/thermal/cooling_device3 None
+/sys/class/thermal/cooling_device4 None
+...
+/sys/class/thermal/thermal_zone0 27.8 C
+/sys/class/thermal/thermal_zone1 29.8 C
+/sys/class/thermal/thermal_zone2 21.0 C
+</code></pre>
+
+<p>But what is a thermal zone? It turns out this is all from the <a href="https://www.kernel.org/doc/Documentation/thermal/sysfs-api.txt">Sysfs API</a> . Per the documentation, a thermal zone is basically a sensor. We can actually look at the content in <code>thermal_zone_path</code> (<code>/sys/class/thermal</code> in my case) to see what sensor it is. Take <code>thermal_zone2</code> as example:</p>
+
+<pre><code>$ cat /sys/class/thermal/thermal_zone2/type
+x86_pkg_temp
+</code></pre>
+
+<p>This one is the CPU package temperature.</p>
+
+<p>In short, the temperature reported in MOTD is the highest temperature of all thermal zones reported by Sysfs API, <em>at login</em>. For more comprehensive temperature reporting you still want to use <code>sensors</code>:</p>
+
+<pre><code>$ sensors
+acpitz-acpi-0
+Adapter: ACPI interface
+temp1:        +27.8°C  (crit = +119.0°C)
+temp2:        +29.8°C  (crit = +119.0°C)
+
+coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +25.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 0:        +19.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 1:        +21.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 2:        +20.0°C  (high = +80.0°C, crit = +100.0°C)
+Core 3:        +20.0°C  (high = +80.0°C, crit = +100.0°C)
+</code></pre>
+
+        
+      </div>
+    </div>
+  </section>
+  <footer>
+  </footer>
+</body>
+</html>
