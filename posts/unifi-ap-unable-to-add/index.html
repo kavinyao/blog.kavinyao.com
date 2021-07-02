@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>How to Fix UniFi AP Unable to Add Issue</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: #333;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    strong {
+      font-weight: bold;
+    }
+    em {
+      font-style: italic;
+    }
+    sub {
+      font-size: smaller;
+    }
+    blockquote {
+      border-left: 10px solid #eee;
+      padding-left: 1em;
+    }
+    blockquote>* {
+      margin-bottom: 10px;
+    }
+    header {
+      margin-top: 1em;
+    }
+    header h1 {
+      font-size: 2em;
+    }
+    .sidebar {
+      font-size: 1.5em;
+    }
+    .sidebar ul {
+      border: 1px #333;
+      border-left-style: solid;
+      padding-left: 1em;
+    }
+    .sidebar li {
+      margin-bottom: .5em;
+    }
+    .breadcrumb-nav {
+      margin-top: 1em;
+    }
+    .the-article {
+      margin-top: 1em;
+      font-size: 1.2em;
+    }
+    .the-article h1 {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .the-article h2 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    .the-article h3 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .the-article>* {
+      margin-bottom: 1em;
+    }
+    .the-article p {
+      line-height: 1.35em;
+    }
+    .the-article a {
+      text-decoration: underline;
+    }
+    .title-group {
+      border-left: 1px solid #888;
+      padding-left: 8px;
+    }
+    .title-group h2 {
+      margin-top: 5px;
+      padding-left: 2px;
+      font-weight: normal;
+    }
+    table td {
+      border: 1px solid #333;
+      padding: 4px;
+    }
+    pre, code, tt {
+      font-family: "Jetbrains Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .9em;
+      background: #343434;
+      border-radius: 5px;
+      color: #fff;
+    }
+    pre {
+      white-space: pre-wrap;
+      padding: 10px;
+      line-height: 1.2em;
+    }
+    code {
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+    pre>code {
+      font-size: inherit;
+      padding: 0px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5em;
+      line-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>
+          <a href="/">Kavin Yao</a>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <section id="main">
+    <div class="row">
+      <div class="breadcrumb-nav col-xs-12">
+        <a href="/">&#x2190; Back</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="the-article col-xs-12">
+        
+        <h1>How to Fix UniFi AP Unable to Add Issue</h1>
+        
+
+        
+        <p>I bought 2 UniFi FlexHD APs a year ago and so far they have been working really well. That said, it's unrealistic to expect prosumer electronic to have infinite uptime. For these APs, they can get into a limbo state: clients are dropped and in controller they are stuck in "Unable to Add" state. This issue only has happened once for each AP but it does seem to reproduce consistently given enough uptime.</p>
+
+<p>When an AP gets into this state, you'll have no luck recovering them from the controller. The only viable fix I found is to reset the AP and adopt it again as if they are new. There are 2 ways to reset: via the hardware reset button or via SSH. Here I have to complain about the physical reset button on FlexHD AP. The hole is simply too deep and I cannot find a common object that's thin and long enough to reach the button. As a result I had to resort to SSH.</p>
+
+<p>To get into the UniFi OS console via SSH, try the default username/password combination (<code>ubnt/ubnt</code>) first. If it doesn't work, it means the controller setting is still persisted in the AP, even after it's forgotten by the controller. You can find the controller issued SSH credential from the "Device SSH Authentication" settings. Once you get into the console, run this command <code>sudo syswrapper.sh restore-default</code> and the AP will be reset. After a minute or so the AP will appear in the controller, ready for adoption again.</p>
+
+        
+      </div>
+    </div>
+  </section>
+  <footer>
+  </footer>
+</body>
+</html>
